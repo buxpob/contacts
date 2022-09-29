@@ -1,0 +1,66 @@
+{
+  "contacts": [
+    {
+      "name": "Nicholas Brakus PhD",
+      "username": "Shea",
+      "email": "Christine79@yahoo.com",
+      "avatar": "https://cdn.fakercloud.com/avatars/ankitind_128.jpg",
+      "id": "1"
+    },
+    {
+      "name": "Ruben Batz Jr.",
+      "username": "Amira",
+      "email": "Stanley_Reichert@gmail.com",
+      "avatar": "https://cdn.fakercloud.com/avatars/wim1k_128.jpg",
+      "id": "2"
+    },
+    {
+      "name": "Rafael Conroy",
+      "username": "Nikita",
+      "email": "Mackenzie.Kohler@yahoo.com",
+      "avatar": "https://cdn.fakercloud.com/avatars/dnezkumar_128.jpg",
+      "id": "3"
+    },
+    {
+      "name": "Sadie DuBuque",
+      "username": "Anjali",
+      "email": "Nathanael_Leannon18@hotmail.com",
+      "avatar": "https://cdn.fakercloud.com/avatars/gabrielrosser_128.jpg",
+      "id": "4"
+    },
+    {
+      "name": "Ann Rutherford",
+      "username": "Raleigh",
+      "email": "Timmy_Schuster56@yahoo.com",
+      "avatar": "https://cdn.fakercloud.com/avatars/enjoythetau_128.jpg",
+      "id": "5"
+    },
+    {
+      "name": "Albert Kub III",
+      "username": "Dwight",
+      "email": "Kaitlin36@hotmail.com",
+      "avatar": "https://cdn.fakercloud.com/avatars/trueblood_33_128.jpg",
+      "id": "6"
+    },
+    {
+      "name": "Rodolfo Bartoletti",
+      "username": "Chesley",
+      "email": "Chance45@gmail.com",
+      "avatar": "https://cdn.fakercloud.com/avatars/ashocka18_128.jpg",
+      "id": "7"
+    },
+    {
+      "name": "Sandra Bernhard",
+      "username": "Jennings",
+      "email": "Porter7@yahoo.com",
+      "avatar": "https://cdn.fakercloud.com/avatars/reideiredale_128.jpg",
+      "id": "8"
+    }
+  ],
+  "users": [
+    {
+      "name": "Aleksei",
+      "password": "Aleksei"
+    }
+  ]
+}

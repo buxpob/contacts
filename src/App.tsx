@@ -1,26 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import AuthScreen from './pages/auth/auth';
+import ContactsScreen from './pages/contacts/contacts';
 
-function App() {
+export default function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="page-main">
+      <Routes>
+        <Route path="/" element={<AuthScreen />} />
+        <Route path="/contacts" element={<ContactsScreen />} />
+      </Routes>
     </div>
   );
 }
-
-export default App;
