@@ -16,24 +16,26 @@ body {
   max-width: 1280px;
   min-height: 100%;
   margin: 0 auto;
+  background-color: rgb(189, 190, 192);
+  padding-left: calc(100vw - 100%);
 }
 
 .page-main {
   position: absolute;
   top: 0;
+  left: 0;
   min-height: 100%;
   min-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(189, 190, 192);
 }
 
 .page-info {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
   background-color: rgb(189, 190, 192);
 }
 
@@ -54,6 +56,15 @@ body {
   height: 250px;
 }
 
+.authorization__title {
+  margin-bottom: 0;
+}
+
+.authorization__form {
+  width: 100%;
+  height: 250px;
+}
+
 .container__title {
   text-align: center;
   margin: 0;
@@ -66,6 +77,7 @@ body {
 
 .form__item {
   margin: 25px 0;
+  width: 255px;
 }
 
 .authorization__item {
@@ -73,6 +85,7 @@ body {
 }
 
 .form__item-input {
+  width: 195px;
   border: 2px solid black;
   border-radius: 5px;
   padding: 5px;
@@ -88,6 +101,7 @@ body {
 
 .authorization__buttons {
   margin-top: 15px;
+  width: 180px;
   border: none;
   display: flex;
   justify-content: space-between;
@@ -108,17 +122,34 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100vw;
-  max-width: 550px;
-  min-height: calc(100vh - 40px);
+  max-width: 570px;
+  min-width: 550px;
+  min-height: calc(100vh - 70px);
   padding: 20px;
   margin: 20px;
+}
+
+.contacts__main {
+  width: 100%;
+  padding: 10px;
+}
+
+.contacts__title {
+  text-align: start;
+  margin-left: 10px;
+}
+
+.contacts__username {
+  margin-left: 10px;
+  margin-bottom: 20px;
 }
 
 .contacts__search {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 245px;
+  margin-left: 10px;
+  padding-right: 5px;
 }
 
 .contacts__loading-error {
@@ -128,19 +159,27 @@ body {
 
 .contact-item {
   border: 1px solid gray;
-  padding: 0 10px;
   margin: 5px;
-  width: 240px;
   border-radius: 5px;
   cursor: pointer;
 }
 
+.contact-item:hover {
+  background-color: rgb(202, 198, 198);
+}
+
+.contact-item-name {
+  padding: 10px;
+  margin: 0;
+}
+
 .contacts__info {
+  width: 100%;
   border: 2px solid black;
   padding: 10px;
   border-radius: 5px;
-  height: 660px;
-  width: 100%;
+  min-height: 100%;
+  width: 550px;
 }
 
 .contacts__info-title {
