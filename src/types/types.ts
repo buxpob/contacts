@@ -7,5 +7,3 @@ export type User = {
 }
 
 export type Users = User[];
-
-export type ServerResponse<T> = T;

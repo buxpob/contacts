@@ -1,10 +1,6 @@
 import { useState, ChangeEvent } from 'react';
-// import axios from 'axios';
-// import validator from 'validator';
-// import { URL_CONTACTS, URL_USERS } from '../../constants/url';
 
 export default function AuthScreen(): JSX.Element {
-
   const [formData, setFormData] = useState({
     name: '',
     password: ''
