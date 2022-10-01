@@ -1,5 +1,4 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { contacts } from './mock/mock';
 import AuthScreen from './pages/auth/auth';
 import ContactsScreen from './pages/contacts/contacts';
 
@@ -10,7 +9,7 @@ export default function App(): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AuthScreen />} />
-          <Route path="/contacts" element={<ContactsScreen contacts={contacts}/>} />
+          <Route path="/contacts" element={<ContactsScreen />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 
 type useInputProps = {
-    value: string;
-    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    value: string,
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void,
   }
 
 export default function useInput(initialValue = ''): useInputProps {

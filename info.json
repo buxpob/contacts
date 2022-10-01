@@ -10,28 +10,28 @@
     {
       "name": "Ruben Batz Jr.",
       "username": "Amira",
-      "email": "Stanley_Reichert@gmail.com",
+      "email": "Reichert@gmail.com",
       "avatar": "Фоторгафия",
       "id": "2"
     },
     {
       "name": "Rafael Conroy",
       "username": "Nikita",
-      "email": "Mackenzie.Kohler@yahoo.com",
+      "email": "Kohler@yahoo.com",
       "avatar": "Фоторгафия",
       "id": "3"
     },
     {
       "name": "Sadie DuBuque",
       "username": "Anjali",
-      "email": "Nathanael_Leannon18@hotmail.com",
+      "email": "Leannon18@hotmail.com",
       "avatar": "Фоторгафия",
       "id": "4"
     },
     {
       "name": "Ann Rutherford",
       "username": "Raleigh",
-      "email": "Timmy_Schuster56@yahoo.com",
+      "email": "Schuster56@yahoo.com",
       "avatar": "Фоторгафия",
       "id": "5"
     },
@@ -59,8 +59,10 @@
   ],
   "users": [
     {
-      "name": "Aleksei",
-      "password": "Aleksei"
+      "id": 1,
+      "name": "A",
+      "password": "A",
+      "token": "token"
     }
   ]
 }

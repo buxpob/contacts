@@ -1,19 +1,15 @@
-import { Users, User } from '../../types/types';
+import { Contact } from '../../types/types';
 import ContactItem from '../contact-item/contact-name';
 import { useAppSelector } from '../../hooks';
+import Loading from '../loading/loading';
 
-type ContactsListProps = {
-  contacts: Users;
-};
-
-export default function ContactsList({ contacts }: ContactsListProps): JSX.Element {
-  const { inputSearchText } = useAppSelector((state) => state);
-
-  const filterContacts = (contact: User) => contact.name.toLowerCase().includes(inputSearchText.toLowerCase());
+export default function ContactsList(): JSX.Element {
+  const { isDataLoaded, contacts } = useAppSelector((state) => state);
 
   return (
     <div className='contacts-list'>
-      {contacts.filter(filterContacts).map((contact: User) => (
+      {isDataLoaded ? <Loading /> : ''}
+      {contacts.map((contact: Contact) => (
         <div
           key={contact.id}
         >

@@ -1,22 +1,19 @@
 import ContactsList from '../../components/contacts-list/contacts-list';
 import { useAppSelector } from '../../hooks';
-import { Users } from '../../types/types';
 import ContactInfo from '../../components/contact-item/contact-info';
-import Search from '../../components/contacts-search/search';
+import Search from '../../components/contacts-search/contacts-search';
+import { store } from '../../store';
+import { fetchContactsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
-type ContactsScreenProps = {
-  contacts: Users;
-}
-
-export default function ContactsScreen({ contacts }: ContactsScreenProps): JSX.Element {
-  const { currentContact } = useAppSelector((state) => state);
-  // const dispatch = useAppDispatch();
+export default function ContactsScreen(): JSX.Element {
+  const { currentContact, inputSearchText } = useAppSelector((state) => state);
 
   // const { error, loading, contacts } = useAppSelector((state) => state.contacts);
 
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  useEffect(() => {
+    store.dispatch(fetchContactsAction());
+  }, [inputSearchText]);
 
   return (
     <div className='page-info'>
@@ -33,14 +30,14 @@ export default function ContactsScreen({ contacts }: ContactsScreenProps): JSX.E
           {/* {loading && <p className='contacts__loading-text'>Loading...</p>}
           {error && <p className='contacts__loading-error'>{error}</p>} */}
 
-          <ContactsList contacts={contacts}/>
+          <ContactsList />
 
         </div>
         <div className='contacts__info'>
           <h3 className='contacts__info-title'>Информация о контакте</h3>
           <div>
 
-            {currentContact.name ? <ContactInfo contact={currentContact} /> : ''}
+            {currentContact ? <ContactInfo contact={currentContact} /> : ''}
 
           </div>
         </div>
