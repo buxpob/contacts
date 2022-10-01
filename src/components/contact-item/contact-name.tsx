@@ -1,9 +1,9 @@
 import { useAppDispatch } from '../../hooks/index';
 import { choiceContact } from '../../store/action';
-import { User } from '../../types/types';
+import { Contact } from '../../types/types';
 
 type ContactItemProps = {
-  contact: User;
+  contact: Contact,
 };
 
 export default function ContactItem({ contact }: ContactItemProps): JSX.Element {

@@ -2,14 +2,14 @@ import { useDebounce } from '../../hooks/debounced';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks/index';
 import { choiceSearchText } from '../../store/action';
-import { debounceTime } from '../../constants/constants';
+import { DEBOUNCE_TIME } from '../../const/const';
 
 export default function Search(): JSX.Element {
   const [value, setValue] = useState('');
 
   const dispatch = useAppDispatch();
 
-  const debounced = useDebounce<string>(value, debounceTime);
+  const debounced = useDebounce<string>(value, DEBOUNCE_TIME);
 
   useEffect(() => {
     dispatch(choiceSearchText({ inputSearchText: debounced }));
