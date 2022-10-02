@@ -12,7 +12,7 @@ export default function Search(): JSX.Element {
   const debounced = useDebounce<string>(value, DEBOUNCE_TIME);
 
   useEffect(() => {
-    dispatch(choiceSearchText({ inputSearchText: debounced }));
+    dispatch(choiceSearchText(debounced));
   }, [debounced]);
 
   return (

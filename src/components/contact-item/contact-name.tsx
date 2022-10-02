@@ -7,15 +7,15 @@ type ContactItemProps = {
 };
 
 export default function ContactItem({ contact }: ContactItemProps): JSX.Element {
-  const { name } = contact;
+  const { username } = contact;
   const dispatch = useAppDispatch();
 
   return (
     <div className='contact-item'>
       <p className='contact-item-name'
-        onClick={() => dispatch(choiceContact({currentContact: contact}))}
+        onClick={() => dispatch(choiceContact(contact))}
       >
-        {name}
+        {username}
       </p>
     </div>
   );

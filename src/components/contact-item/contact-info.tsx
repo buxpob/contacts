@@ -1,43 +1,43 @@
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { store } from '../../store';
-import { deleteContact } from '../../store/api-actions';
-import { Contact } from '../../types/types';
+import { isEditContact } from '../../store/action';
+import { deleteContactAction } from '../../store/api-actions';
+import ContactInfoEdit from './contact-edit';
 
-type ContactInfoProps = {
-  contact: Contact,
-};
+export default function ContactInfo(): JSX.Element {
+  const { currentContact, isEdit } = useAppSelector((state) => state);
+  const { username, nickname, email, avatar, id } = currentContact;
 
-export default function ContactInfo({ contact }: ContactInfoProps): JSX.Element {
-  const { name, username, email, avatar } = contact;
+  const dispatch = useAppDispatch();
 
   return (
     <>
-      <div className='contact-info'>
-        <p>{avatar}</p>
-        <p>Имя: {name}</p>
-        <p>Логин: {username}</p>
-        <p>Email: {email}</p>
-      </div>
+      {isEdit
+        ?
+        <>
+          <p>{avatar}</p>
+          <p>Имя:<br />{username}</p>
+          <p>Login:<br />{nickname}</p>
+          <p>Email:<br />{email}</p>
+
+          <button
+            className='button-info__edit contact-info__button'
+            type='button'
+            onClick={() => dispatch(isEditContact(false))}
+          >
+            Редактировать контакт
+          </button>
+
+        </>
+        : <ContactInfoEdit contact={currentContact}/>}
 
       <button
         className='button-info__delete contact-info__button'
         type='button'
         onClick={() => {
-          store.dispatch(deleteContact(contact));
+          store.dispatch(deleteContactAction(id));
+          dispatch(isEditContact(true));
         }}
-      >
-        Удалить контакт
-      </button>
-
-      <button
-        className='button-info__edit contact-info__button'
-        type='button'
-      >
-        Редактировать контакт
-      </button>
-
-      <button
-        className='button-info__save contact-info__button'
-        type='button'
       >
         Удалить контакт
       </button>
