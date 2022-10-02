@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { getToken } from './token';
 import { processErrorHandle } from '../process-error-handle';
 
@@ -34,7 +34,7 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.response.use(
     (response) => response,
-    (error: any) => {
+    (error) => {
 
       if (error.response && shouldDisplayError(error.response)) {
         processErrorHandle(error.response.data.error);

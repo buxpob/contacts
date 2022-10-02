@@ -1,19 +1,19 @@
-import { ChangeEvent, FormEvent, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const/const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+// import { ChangeEvent, FormEvent, useRef } from 'react';
+import { useRef } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { AppRoute } from '../../const/const';
+// import { useAppDispatch, useAppSelector } from '../../hooks';
 // import { loginAction } from '../../store/api-actions';
-import { AuthData } from '../../types/types';
+// import { AuthData } from '../../types/types';
 
 export default function AuthScreen(): JSX.Element {
-  const { users } = useAppSelector((state) => state);
-  console.log(users);
+  // const { users } = useAppSelector((state) => state);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
 
   // const onSubmit = (authData: AuthData) => {
   //   dispatch(loginAction(authData));

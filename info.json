@@ -1,66 +1,38 @@
 {
   "contacts": [
     {
-      "name": "Nicholas Brakus PhD",
-      "username": "Shea",
-      "email": "Christine79@yahoo.com",
-      "avatar": "Фоторгафия",
-      "id": "1"
-    },
-    {
-      "name": "Ruben Batz Jr.",
-      "username": "Amira",
+      "username": "Ruben",
+      "nickname": "Ami",
       "email": "Reichert@gmail.com",
-      "avatar": "Фоторгафия",
-      "id": "2"
-    },
-    {
-      "name": "Rafael Conroy",
-      "username": "Nikita",
-      "email": "Kohler@yahoo.com",
       "avatar": "Фоторгафия",
       "id": "3"
     },
     {
-      "name": "Sadie DuBuque",
-      "username": "Anjali",
-      "email": "Leannon18@hotmail.com",
+      "username": "Ruben Ba",
+      "nickname": "Amira",
+      "email": "Reichert@gmail.com",
       "avatar": "Фоторгафия",
       "id": "4"
     },
     {
-      "name": "Ann Rutherford",
-      "username": "Raleigh",
-      "email": "Schuster56@yahoo.com",
+      "username": "Albert Kub III",
+      "nickname": "Dwight",
+      "email": "Kaitlin36@hotmail.com",
       "avatar": "Фоторгафия",
       "id": "5"
     },
     {
-      "name": "Albert Kub III",
-      "username": "Dwight",
-      "email": "Kaitlin36@hotmail.com",
-      "avatar": "Фоторгафия",
-      "id": "6"
-    },
-    {
-      "name": "Rodolfo Bartoletti",
-      "username": "Chesley",
+      "username": "Rodolfo Bartoletti",
+      "nickname": "Chesley",
       "email": "Chance45@gmail.com",
       "avatar": "Фоторгафия",
-      "id": "7"
-    },
-    {
-      "name": "Sandra Bernhard",
-      "username": "Jennings",
-      "email": "Porter7@yahoo.com",
-      "avatar": "Фоторгафия",
-      "id": "8"
+      "id": "6"
     }
   ],
   "users": [
     {
       "id": 1,
-      "name": "A",
+      "login": "A",
       "password": "A",
       "token": "token"
     }

@@ -7,9 +7,7 @@ import { fetchContactsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 
 export default function ContactsScreen(): JSX.Element {
-  const { currentContact, inputSearchText } = useAppSelector((state) => state);
-
-  // const { error, loading, contacts } = useAppSelector((state) => state.contacts);
+  const { inputSearchText, currentContact } = useAppSelector((state) => state);
 
   useEffect(() => {
     store.dispatch(fetchContactsAction());
@@ -27,9 +25,6 @@ export default function ContactsScreen(): JSX.Element {
 
           </form>
 
-          {/* {loading && <p className='contacts__loading-text'>Loading...</p>}
-          {error && <p className='contacts__loading-error'>{error}</p>} */}
-
           <ContactsList />
 
         </div>
@@ -37,7 +32,7 @@ export default function ContactsScreen(): JSX.Element {
           <h3 className='contacts__info-title'>Информация о контакте</h3>
           <div>
 
-            {currentContact ? <ContactInfo contact={currentContact} /> : ''}
+            {currentContact.username && <ContactInfo />}
 
           </div>
         </div>

@@ -1,6 +1,6 @@
 export type Contact = {
-  name: string,
   username: string,
+  nickname: string,
   email: string,
   avatar: string,
   id: string,
@@ -10,7 +10,7 @@ export type Contacts = Contact[];
 
 export type UserData = {
   id: number,
-  name: string,
+  login: string,
   token: string,
 };
 
@@ -23,7 +23,7 @@ export type AuthData = {
 
 export type User = {
   id: number,
-  name: string,
+  login: string,
   email: string,
   token: string,
 };

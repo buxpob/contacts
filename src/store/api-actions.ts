@@ -1,6 +1,6 @@
 import { store } from '../store/index';
 import { TIMEOUT_SHOW_ERROR } from './../const/const';
-import { setError, setDataLoadedStatus, updateContacts, choiceContact } from './action';
+import { setError, setDataLoadedStatus, updateContacts, choiceContact, editContact, isEditContact } from './action';
 import { Contacts, Contact } from './../types/types';
 import { APIRoute } from '../const/const';
 import { AxiosInstance } from 'axios';
@@ -26,58 +26,50 @@ export const fetchContactsAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api, getState}) => {
     const { inputSearchText } = getState();
     const { data } = await api.get<Contacts>(`${APIRoute.Contacts}?q=${inputSearchText}`);
+
     dispatch(setDataLoadedStatus(true));
     dispatch(updateContacts(data));
     dispatch(setDataLoadedStatus(false));
   },
 );
 
-export const deleteContact = createAsyncThunk<void, Contact, {
+export const deleteContactAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'deleteContact',
-  async (contact, { dispatch, getState}) => {
-    const { contacts, currentContact } = getState();
-    const current = contacts.findIndex((item) => item.id === contact.id);
-    dispatch(updateContacts([...contacts.slice(0, current), ...contacts.slice(current + 1)]));
-    if (currentContact && currentContact.id === contact.id) {
-      dispatch(choiceContact({currentContact: null}));
-    }
+  async (id, { dispatch, extra: api, getState}) => {
+    await api.delete<Contacts>(`${APIRoute.Contacts}/${id}`);
 
-    // await api.get(APIRoute.Contacts);
+    const { contacts, currentContact } = getState();
+    const current = contacts.findIndex((item) => item.id === id);
+    dispatch(updateContacts([...contacts.slice(0, current), ...contacts.slice(current + 1)]));
+    if (currentContact && currentContact.id === id) {
+      dispatch(choiceContact({
+        username: '',
+        nickname: '',
+        email: '',
+        avatar: '',
+        id: ''
+      }));
+    }
   },
 );
 
-// export const checkAuthAction = createAsyncThunk<void, undefined, {
-//   dispatch: AppDispatch,
-//   state: State,
-//   extra: AxiosInstance
-// }>(
-//   'checkAuth',
-//   async (_arg, { dispatch, extra: api }) => {
-//     await api.get(APIRoute.Users);
-//     try {
-//       await api.get(APIRoute.Users);
-//       dispatch(requireAuthorization(AuthorizationStatus.Auth));
-//     } catch {
-//       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-//     }
-//   },
-// );
+export const editContactAction = createAsyncThunk<void, Contact, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'editContact',
+  async (contact, { dispatch, extra: api, getState }) => {
+    await api.put<Contact>(`${APIRoute.Contacts}/${contact.id}`, {...contact});
 
-// export const loginAction = createAsyncThunk<void, AuthData, {
-//   dispatch: AppDispatch,
-//   state: State,
-//   extra: AxiosInstance
-// }>(
-//   'fetchUsers',
-//   async (_arg, { dispatch, extra: api }) => {
-//     const { data } = await api.get<Users>(APIRoute.Users);
-//     dispatch(setUsers(data));
-// saveToken(token);
-// dispatch(requireAuthorization(AuthorizationStatus.Auth));
-// dispatch(redirectToRoute(AppRoute.Contacts));
-//   },
-// );
+    const { contacts, currentContact } = getState();
+    const current = contacts.findIndex((item) => item.id === contact.id);
+    dispatch(updateContacts([...contacts.slice(0, current), contact, ...contacts.slice(current + 1)]));
+    dispatch(editContact({ ...currentContact, ...contact }));
+    dispatch(isEditContact(true));
+  },
+);
