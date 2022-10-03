@@ -1,6 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { getToken } from './token';
 import { processErrorHandle } from '../process-error-handle';
 
 const StatusCodeMapping: Record<number, boolean> = {
@@ -20,17 +19,17 @@ export const createAPI = (): AxiosInstance => {
     timeout: REQEST_TIMEOUT,
   });
 
-  api.interceptors.request.use(
-    (config: any) => {
-      const token = getToken();
+  // api.interceptors.request.use(
+  //   (config: any) => {
+  //     const token = getToken();
 
-      if (token) {
-        config.headers['x-token'] = token;
-      }
+  //     if (token) {
+  //       config.headers['x-token'] = token;
+  //     }
 
-      return config;
-    }
-  );
+  //     return config;
+  //   }
+  // );
 
   api.interceptors.response.use(
     (response) => response,

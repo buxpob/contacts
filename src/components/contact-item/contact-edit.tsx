@@ -1,6 +1,9 @@
 import { ChangeEvent, useState } from 'react';
+import { EMPTY_CONTACT } from '../../const/const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { store } from '../../store';
-import { editContactAction } from '../../store/api-actions';
+import { editCurrentContactStatus, editNewContactStatus, editCurrentContact, editContactStatus } from '../../store/action';
+import { addContactAction, editContactAction, fetchContactsAction } from '../../store/api-actions';
 import { Contact } from '../../types/types';
 
 type ContactInfoEditProps = {
@@ -8,7 +11,10 @@ type ContactInfoEditProps = {
 }
 
 export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.Element {
+  const { isNewContact } = useAppSelector((state) => state);
   const { username, nickname, email, avatar, id } = contact;
+
+  const dispatch = useAppDispatch();
 
   const [ formData, setFormData ] = useState({
     username,
@@ -23,8 +29,20 @@ export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.
     setFormData({ ...formData, [name]: value });
   };
 
-  const updateStateHandle = () => {
+  const editContactHandle = () => {
     store.dispatch(editContactAction(formData));
+  };
+
+  const deleteContactHandle = () => {
+    dispatch(editCurrentContact(EMPTY_CONTACT));
+    dispatch(editContactStatus(false));
+    dispatch(editCurrentContactStatus(false));
+    dispatch(editNewContactStatus(false));
+  };
+
+  const addContactHandle = () => {
+    store.dispatch(addContactAction(formData));
+    store.dispatch(fetchContactsAction());
   };
 
   return (
@@ -37,6 +55,7 @@ export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.
           name='avatar'
           value={formData.avatar}
           onChange={fieldChangeHandle}
+          placeholder='место для фотографии'
         />
 
         <label htmlFor="username">Имя:</label>
@@ -46,15 +65,17 @@ export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.
           name='username'
           value={formData.username}
           onChange={fieldChangeHandle}
+          placeholder='Введите имя контакта'
         />
 
-        <label htmlFor='nickname'>Логин:</label>
+        <label htmlFor='nickname'>Nickname:</label>
         <input
           className='contact-info__input'
           type='text'
           name='nickname'
           value={formData.nickname}
           onChange={fieldChangeHandle}
+          placeholder='Введите nickname контакта'
         />
 
         <label htmlFor='email'>Email:</label>
@@ -64,17 +85,37 @@ export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.
           name='email'
           value={formData.email}
           onChange={fieldChangeHandle}
+          placeholder='Введите email контакта'
         />
       </div>
 
-      <button
-        className='button-info__save contact-info__button'
-        type='button'
-        onClick={updateStateHandle}
-      >
+      {!isNewContact
+        ?
+        <button
+          className='button-info__save contact-info__button'
+          type='button'
+          onClick={editContactHandle}
+        >
         Сохранить контакт
-      </button>
+        </button>
+        :
+        <>
+          <button
+            className='button-info__save contact-info__button'
+            type='button'
+            onClick={addContactHandle}
+          >
+          Добавить контакт
+          </button>
 
+          <button
+            className='button-info__save contact-info__button'
+            type='button'
+            onClick={deleteContactHandle}
+          >
+          Удалить контакт
+          </button>
+        </>}
     </form>
 
   );

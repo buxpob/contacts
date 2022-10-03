@@ -1,6 +1,6 @@
 import { Contact } from '../../types/types';
-import ContactItem from '../contact-item/contact-name';
 import { useAppSelector } from '../../hooks';
+import ContactItem from '../contact-item/contact-name';
 import Loading from '../loading/loading';
 
 export default function ContactsList(): JSX.Element {

@@ -8,24 +8,16 @@ export type Contact = {
 
 export type Contacts = Contact[];
 
-export type UserData = {
-  id: number,
-  login: string,
-  token: string,
-};
-
 export type AuthData = {
   login: string,
   password: string,
-  token: string
 };
 
 
 export type User = {
   id: number,
   login: string,
-  email: string,
-  token: string,
+  password: string,
 };
 
 export type Users = User[];
