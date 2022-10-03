@@ -1,34 +1,30 @@
+import { EMPTY_CONTACT } from './../const/const';
 import { Contact, Contacts, Users } from './../types/types';
-import { AuthorizationStatus } from '../const/const';
-import { choiceContact, choiceSearchText, setDataLoadedStatus, updateContacts, isEditContact, editContact } from './action';
+import { editCurrentContact, choiceSearchText, setDataLoadedStatus, updateContacts, editContactStatus, editCurrentContactStatus, editNewContactStatus, getUsers } from './action';
 import { createReducer } from '@reduxjs/toolkit';
 
 type InitialState = {
+  isCurrentContact: boolean,
   currentContact: Contact,
   inputSearchText: string,
   contacts: Contacts,
-  authorizationStatus: AuthorizationStatus,
   error: string | null,
   isDataLoaded: boolean,
-  users: Users | null,
-  isEdit: boolean
+  isEdit: boolean,
+  isNewContact: boolean,
+  users: Users,
 }
 
 const initialState: InitialState = {
-  currentContact: {
-    username: '',
-    nickname: '',
-    email: '',
-    avatar: '',
-    id: ''
-  },
+  isCurrentContact: false,
+  currentContact: EMPTY_CONTACT,
   inputSearchText: '',
   contacts: [],
-  authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
   isDataLoaded: true,
+  isEdit: false,
+  isNewContact: false,
   users: [],
-  isEdit: true
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -39,23 +35,22 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
     })
-    .addCase(choiceContact, (state, action) => {
+    .addCase(editCurrentContact, (state, action) => {
       state.currentContact = action.payload;
+    })
+    .addCase(editCurrentContactStatus, (state, action) => {
+      state.isCurrentContact = action.payload;
     })
     .addCase(choiceSearchText, (state, action) => {
       state.inputSearchText = action.payload;
     })
-    .addCase(isEditContact, (state, action) => {
+    .addCase(editContactStatus, (state, action) => {
       state.isEdit = action.payload;
     })
-    .addCase(editContact, (state, action) => {
-      state.currentContact = action.payload;
+    .addCase(editNewContactStatus, (state, action) => {
+      state.isNewContact = action.payload;
+    })
+    .addCase(getUsers, (state, action) => {
+      state.users = action.payload;
     });
-  // .addCase(requireAuthorization, (state, action) => {
-  //   state.authorizationStatus = action.payload;
-  // })
-  // .addCase(setUsers, (state, action) => {
-  //   state.users = action.payload;
-  // })
 });
-

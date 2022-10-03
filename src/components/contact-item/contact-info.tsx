@@ -1,18 +1,18 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { store } from '../../store';
-import { isEditContact } from '../../store/action';
+import { editContactStatus } from '../../store/action';
 import { deleteContactAction } from '../../store/api-actions';
 import ContactInfoEdit from './contact-edit';
 
 export default function ContactInfo(): JSX.Element {
-  const { currentContact, isEdit } = useAppSelector((state) => state);
+  const { currentContact, isEdit, isNewContact } = useAppSelector((state) => state);
   const { username, nickname, email, avatar, id } = currentContact;
 
   const dispatch = useAppDispatch();
 
   return (
     <>
-      {isEdit
+      {!isEdit
         ?
         <>
           <p>{avatar}</p>
@@ -23,7 +23,7 @@ export default function ContactInfo(): JSX.Element {
           <button
             className='button-info__edit contact-info__button'
             type='button'
-            onClick={() => dispatch(isEditContact(false))}
+            onClick={() => dispatch(editContactStatus(true))}
           >
             Редактировать контакт
           </button>
@@ -31,16 +31,18 @@ export default function ContactInfo(): JSX.Element {
         </>
         : <ContactInfoEdit contact={currentContact}/>}
 
-      <button
-        className='button-info__delete contact-info__button'
-        type='button'
-        onClick={() => {
-          store.dispatch(deleteContactAction(id));
-          dispatch(isEditContact(true));
-        }}
-      >
-        Удалить контакт
-      </button>
+      {!isNewContact
+        &&
+        <button
+          className='button-info__delete contact-info__button'
+          type='button'
+          onClick={() => {
+            store.dispatch(deleteContactAction(id));
+            dispatch(editContactStatus(true));
+          }}
+        >
+          Удалить контакт
+        </button>}
     </>
   );
 }

@@ -1,34 +1,61 @@
-// import { ChangeEvent, FormEvent, useRef } from 'react';
-import { useRef } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { AppRoute } from '../../const/const';
-// import { useAppDispatch, useAppSelector } from '../../hooks';
-// import { loginAction } from '../../store/api-actions';
-// import { AuthData } from '../../types/types';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const/const';
+import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { fetchUsersAction } from '../../store/api-actions';
+
+store.dispatch(fetchUsersAction());
 
 export default function AuthScreen(): JSX.Element {
-  // const { users } = useAppSelector((state) => state);
+  const [formData, setFormData] = useState({
+    login: '',
+    password: '',
+  });
 
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [errorData, setErrorData] = useState({
+    isEmptyLogin: false,
+    isEmptyPassword: false,
+    isCorrectLogin: true,
+    isCorrectPassword: true,
+  });
 
-  // const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const { users } = useAppSelector((state) => state);
 
-  // const onSubmit = (authData: AuthData) => {
-  //   dispatch(loginAction(authData));
-  // };
+  const navigate = useNavigate();
 
-  // const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-  //   evt.preventDefault();
+  const fieldChangeHandle = (evt: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = evt.target;
+    setFormData({ ...formData, [name]: value });
+    name === 'login' && setErrorData({ ...errorData, isEmptyLogin: false });
+    name === 'password' && setErrorData({ ...errorData, isEmptyPassword: false });
+  };
 
-  //   if (loginRef.current !== null && passwordRef.current !== null) {
-  //     onSubmit({
-  //       login: loginRef.current.value,
-  //       password: passwordRef.current.value,
-  //     });
-  //   }
-  // };
+  const AuthorizationSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (formData.password === '') {
+      setErrorData({ ...errorData, isEmptyPassword: true });
+    }
+
+    if (formData.login === '') {
+      setErrorData({ ...errorData, isEmptyLogin: true });
+    }
+
+    const currentUser = users.find((user) => user.login === formData.login);
+
+    if (!currentUser && (formData.login.length > 0) && (formData.password.length > 0)) {
+      setErrorData({ ...errorData, isCorrectLogin: false });
+    }
+
+    if (currentUser && (formData.password.length > 0) && (currentUser.password !== formData.password)) {
+      setErrorData({ ...errorData, isCorrectLogin: true, isCorrectPassword: false });
+    }
+
+    if (currentUser && (currentUser.password === formData.password)) {
+      navigate(AppRoute.Contacts);
+    }
+  };
 
   return (
     <div className='page-info'>
@@ -38,43 +65,46 @@ export default function AuthScreen(): JSX.Element {
         <form
           className='authorization__form form'
           action=''
-          // onSubmit={handleSubmit}
+          onSubmit={AuthorizationSubmitHandle}
         >
           <div className='authorization__item form__item'>
-            <label className='authorization__item-label form__item-label' htmlFor='firstname'></label>
+            <label className='authorization__item-label form__item-label' htmlFor='login'></label>
             <input
-              ref={loginRef}
               className='authorization__item-input form__item-input'
-              name='name'
-              id='name'
+              name='login'
+              id='login'
               placeholder='Введите имя'
               maxLength={20}
               type='text'
-              required
+              value={formData.login}
+              onChange={fieldChangeHandle}
             />
-            <p className='authorization__clue-name'>{}Введите имя</p>
+            {errorData.isEmptyLogin && <p className='authorization__clue-login'>Введите имя</p>}
+            {!errorData.isCorrectLogin && <p className='authorization__clue-login'>Пользователь не найден</p>}
+
+
           </div>
 
           <div className='authorization__item form__item'>
             <label className='authorization__item-label form__item-label' htmlFor='password' ></label>
             <input
-              ref={passwordRef}
               className='authorization__item-input form__item-input'
               name='password'
               id='password'
               placeholder='Введите пароль'
               maxLength={20}
               type='password'
-              required
+              value={formData.password}
+              onChange={fieldChangeHandle}
             />
-            <p className='authorization__clue-password'>Введите пароль</p>
+            {errorData.isEmptyPassword && <p className='authorization__clue-password'>Введите пароль</p>}
+            {!errorData.isCorrectPassword && <p className='authorization__clue-login'>Неверный пароль</p>}
           </div>
 
           <div className='authorization__item authorization__buttons form__item'>
             <button
               className='authorization__button'
               type='submit'
-              // onClick={() => navigate(AppRoute.Contacts)}
             >вход
             </button>
             <span className='authorization__link'>регистрация</span>

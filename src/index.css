@@ -92,7 +92,7 @@ body {
   outline: none;
 }
 
-.authorization__clue-name,
+.authorization__clue-login,
 .authorization__clue-password {
   position: absolute;
   top: 10px;
@@ -152,6 +152,16 @@ body {
   padding-right: 5px;
 }
 
+.new-contact-button {
+  width: 255px;
+  margin-left: 5px;
+  margin-bottom: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
 .contacts__loading-error {
   color: red;
   text-align: center;
@@ -180,7 +190,6 @@ body {
   padding: 10px;
   border-radius: 5px;
   min-height: 100%;
-  width: 550px;
 }
 
 .contacts__info-title {
