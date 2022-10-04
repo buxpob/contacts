@@ -12,7 +12,7 @@ type ContactInfoEditProps = {
 
 export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.Element {
   const { isNewContact } = useAppSelector((state) => state);
-  const { username, nickname, email, avatar, id } = contact;
+  const { username, nickname, email, info, id } = contact;
 
   const dispatch = useAppDispatch();
 
@@ -20,8 +20,12 @@ export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.
     username,
     nickname,
     email,
-    avatar,
+    info,
     id
+  });
+
+  const [errorData, setErrorData] = useState({
+    emptyName: false,
   });
 
   const fieldChangeHandle = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -41,22 +45,19 @@ export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.
   };
 
   const addContactHandle = () => {
-    store.dispatch(addContactAction(formData));
-    store.dispatch(fetchContactsAction());
+    if (formData.username.length < 1) {
+      setErrorData({ emptyName: true});
+    }
+
+    if (formData.username.length >= 1) {
+      store.dispatch(addContactAction(formData));
+      store.dispatch(fetchContactsAction());
+    }
   };
 
   return (
     <form>
       <div className='contact-info'>
-        <label htmlFor='avatar'></label>
-        <input
-          className='contact-info__input'
-          type='text'
-          name='avatar'
-          value={formData.avatar}
-          onChange={fieldChangeHandle}
-          placeholder='место для фотографии'
-        />
 
         <label htmlFor="username">Имя:</label>
         <input
@@ -67,6 +68,7 @@ export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.
           onChange={fieldChangeHandle}
           placeholder='Введите имя контакта'
         />
+        {errorData.emptyName && <p className='contact-info__empty-username'>Введите имя</p>}
 
         <label htmlFor='nickname'>Nickname:</label>
         <input
@@ -87,6 +89,17 @@ export default function ContactInfoEdit({ contact }: ContactInfoEditProps): JSX.
           onChange={fieldChangeHandle}
           placeholder='Введите email контакта'
         />
+
+        <label htmlFor='info'>Заметки:</label>
+        <input
+          className='contact-info__input'
+          type='text'
+          name='info'
+          value={formData.info}
+          onChange={fieldChangeHandle}
+          placeholder='Введите данные'
+        />
+
       </div>
 
       {!isNewContact

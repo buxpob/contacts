@@ -1,16 +1,16 @@
-const AUTH_USER_KEY_NAME = '';
+const AUTH_USER_KEY_NAME = 'username';
 
 export type User = string;
 
-export const getUser = (): User => {
-  const token = sessionStorage.getItem(AUTH_USER_KEY_NAME);
-  return token ?? '';
+export const getUserSessionStorage = (): User => {
+  const user = sessionStorage.getItem(AUTH_USER_KEY_NAME);
+  return user ?? '';
 };
 
-export const saveUser = (user: User): void => {
+export const saveUserSessionStorage = (user: User): void => {
   sessionStorage.setItem(AUTH_USER_KEY_NAME, user);
 };
 
-export const dropToken = (): void => {
+export const removeUserSessionStorage = (): void => {
   sessionStorage.removeItem(AUTH_USER_KEY_NAME);
 };

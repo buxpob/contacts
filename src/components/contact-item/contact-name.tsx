@@ -10,7 +10,7 @@ export default function ContactItem({ contact }: ContactItemProps): JSX.Element 
   const { username } = contact;
   const dispatch = useAppDispatch();
 
-  const choiseContact = () => {
+  const choiseContactClickHandler = () => {
     dispatch(editCurrentContact(contact));
     dispatch(editContactStatus(false));
     dispatch(editCurrentContactStatus(true));
@@ -20,7 +20,7 @@ export default function ContactItem({ contact }: ContactItemProps): JSX.Element 
   return (
     <div className='contact-item'>
       <p className='contact-item-name'
-        onClick={choiseContact}
+        onClick={choiseContactClickHandler}
       >
         {username}
       </p>

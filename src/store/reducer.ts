@@ -1,6 +1,6 @@
 import { EMPTY_CONTACT } from './../const/const';
 import { Contact, Contacts, Users } from './../types/types';
-import { editCurrentContact, choiceSearchText, setDataLoadedStatus, updateContacts, editContactStatus, editCurrentContactStatus, editNewContactStatus, getUsers } from './action';
+import { editCurrentContact, editSearchText, setDataLoadedStatus, updateContacts, editContactStatus, editCurrentContactStatus, editNewContactStatus, getUsers, setError } from './action';
 import { createReducer } from '@reduxjs/toolkit';
 
 type InitialState = {
@@ -41,7 +41,7 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(editCurrentContactStatus, (state, action) => {
       state.isCurrentContact = action.payload;
     })
-    .addCase(choiceSearchText, (state, action) => {
+    .addCase(editSearchText, (state, action) => {
       state.inputSearchText = action.payload;
     })
     .addCase(editContactStatus, (state, action) => {
@@ -52,5 +52,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getUsers, (state, action) => {
       state.users = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });

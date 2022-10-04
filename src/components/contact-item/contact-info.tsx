@@ -6,19 +6,25 @@ import ContactInfoEdit from './contact-edit';
 
 export default function ContactInfo(): JSX.Element {
   const { currentContact, isEdit, isNewContact } = useAppSelector((state) => state);
-  const { username, nickname, email, avatar, id } = currentContact;
+  const { username, nickname, email, info, id } = currentContact;
 
   const dispatch = useAppDispatch();
+
+  const deleteContactClickHandler = () => {
+    store.dispatch(deleteContactAction(id));
+    dispatch(editContactStatus(true));
+  };
 
   return (
     <>
       {!isEdit
         ?
         <>
-          <p>{avatar}</p>
+
           <p>Имя:<br />{username}</p>
           <p>Login:<br />{nickname}</p>
           <p>Email:<br />{email}</p>
+          <p>Заметки:<br />{info}</p>
 
           <button
             className='button-info__edit contact-info__button'
@@ -36,10 +42,7 @@ export default function ContactInfo(): JSX.Element {
         <button
           className='button-info__delete contact-info__button'
           type='button'
-          onClick={() => {
-            store.dispatch(deleteContactAction(id));
-            dispatch(editContactStatus(true));
-          }}
+          onClick={deleteContactClickHandler}
         >
           Удалить контакт
         </button>}

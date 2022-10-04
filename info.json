@@ -1,66 +1,45 @@
 {
   "contacts": [
     {
-      "username": "Rodolfo",
+      "username": "Rafael",
+      "nickname": "Ami",
+      "email": "ole@mail.ru",
+      "info": "фото",
+      "id": "3"
+    },
+    {
+      "username": "Rodolf",
       "nickname": "Chesley",
       "email": "Chance45@gmail.com",
-      "avatar": "Фоторгафия",
-      "id": "6"
+      "info": "Фоторгафия",
+      "id": "4"
     },
     {
       "username": "Albert Kub III",
       "nickname": "Dwight",
       "email": "Kaitlin36@hotmail.com",
-      "avatar": "Фоторгафия",
-      "id": "7"
+      "info": "Фоторгафия",
+      "id": "5"
+    },
+    {
+      "username": "Rafad",
+      "nickname": "Ami",
+      "email": "ole@mail.ru",
+      "info": "фото",
+      "id": "6"
     },
     {
       "username": "Rafael",
-      "nickname": "Ami",
-      "email": "ole@mail.ru",
-      "avatar": "фото",
-      "id": "liPOVOg"
-    },
-    {
-      "username": "Ruben",
       "nickname": "ole",
       "email": "ole@mail.ru",
-      "avatar": "фото",
-      "id": "dPRKwFa"
-    },
-    {
-      "username": "Rafael",
-      "nickname": "Ami",
-      "email": "ole@mail.ru",
-      "avatar": "фото",
-      "id": "HrEewGw"
-    },
-    {
-      "username": "Ruben",
-      "nickname": "Ami",
-      "email": "ole@mail.ru",
-      "avatar": "фото",
-      "id": "WFp5-yC"
-    },
-    {
-      "username": "Rube",
-      "nickname": "ole",
-      "email": "ole@mail.ru",
-      "avatar": "фото",
-      "id": "Ruben-803"
-    },
-    {
-      "username": "Ru",
-      "nickname": "ole",
-      "email": "ole@mail.ru",
-      "avatar": "фото",
-      "id": "Rube-449"
+      "info": "",
+      "id": "Rafael-868"
     }
   ],
   "users": [
     {
       "id": 1,
-      "login": "Aleksei",
+      "login": "login",
       "password": "password"
     }
   ]

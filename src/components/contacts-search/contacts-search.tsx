@@ -1,7 +1,7 @@
 import { useDebounce } from '../../hooks/debounced';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks/index';
-import { choiceSearchText } from '../../store/action';
+import { editSearchText } from '../../store/action';
 import { DEBOUNCE_TIME } from '../../const/const';
 
 export default function Search(): JSX.Element {
@@ -12,7 +12,7 @@ export default function Search(): JSX.Element {
   const debounced = useDebounce<string>(value, DEBOUNCE_TIME);
 
   useEffect(() => {
-    dispatch(choiceSearchText(debounced));
+    dispatch(editSearchText(debounced));
   }, [debounced]);
 
   return (

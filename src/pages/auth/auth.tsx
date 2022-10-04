@@ -1,7 +1,9 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ErrorMessage from '../../components/error-message/error-message';
 import { AppRoute } from '../../const/const';
 import { useAppSelector } from '../../hooks';
+import { saveUserSessionStorage } from '../../services/user';
 import { store } from '../../store';
 import { fetchUsersAction } from '../../store/api-actions';
 
@@ -24,14 +26,14 @@ export default function AuthScreen(): JSX.Element {
 
   const navigate = useNavigate();
 
-  const fieldChangeHandle = (evt: ChangeEvent<HTMLInputElement>) => {
+  const fieldChangeHandler = (evt: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: value });
     name === 'login' && setErrorData({ ...errorData, isEmptyLogin: false });
     name === 'password' && setErrorData({ ...errorData, isEmptyPassword: false });
   };
 
-  const AuthorizationSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
+  const AuthorizationSubmitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (formData.password === '') {
@@ -54,18 +56,20 @@ export default function AuthScreen(): JSX.Element {
 
     if (currentUser && (currentUser.password === formData.password)) {
       navigate(AppRoute.Contacts);
+      saveUserSessionStorage(currentUser.login);
     }
   };
 
   return (
     <div className='page-info'>
+      <ErrorMessage />
       <div className='authorization container'>
 
         <h1 className='authorization__title'>Авторизация</h1>
         <form
           className='authorization__form form'
           action=''
-          onSubmit={AuthorizationSubmitHandle}
+          onSubmit={AuthorizationSubmitHandler}
         >
           <div className='authorization__item form__item'>
             <label className='authorization__item-label form__item-label' htmlFor='login'></label>
@@ -73,13 +77,13 @@ export default function AuthScreen(): JSX.Element {
               className='authorization__item-input form__item-input'
               name='login'
               id='login'
-              placeholder='Введите имя'
+              placeholder='Введите логин'
               maxLength={20}
               type='text'
               value={formData.login}
-              onChange={fieldChangeHandle}
+              onChange={fieldChangeHandler}
             />
-            {errorData.isEmptyLogin && <p className='authorization__clue-login'>Введите имя</p>}
+            {errorData.isEmptyLogin && <p className='authorization__clue-login'>Введите логин</p>}
             {!errorData.isCorrectLogin && <p className='authorization__clue-login'>Пользователь не найден</p>}
 
 
@@ -95,7 +99,7 @@ export default function AuthScreen(): JSX.Element {
               maxLength={20}
               type='password'
               value={formData.password}
-              onChange={fieldChangeHandle}
+              onChange={fieldChangeHandler}
             />
             {errorData.isEmptyPassword && <p className='authorization__clue-password'>Введите пароль</p>}
             {!errorData.isCorrectPassword && <p className='authorization__clue-login'>Неверный пароль</p>}
